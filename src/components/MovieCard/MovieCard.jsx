@@ -1,3 +1,13 @@
+import {
+  Container,
+  Poster,
+  MovieInfo,
+  Title,
+  Release,
+  Details,
+  Info,
+} from './MovieCard.styled';
+
 export const MovieCard = ({ movie }) => {
   const { poster_path, title, release_date, vote_average, overview, genres } =
     movie;
@@ -8,17 +18,23 @@ export const MovieCard = ({ movie }) => {
   const genresList = genres.map(ganre => ganre.name).join(', ');
 
   return (
-    <div>
-      <img src={imgUrl} alt="" />
-      <div>
-        <h2>
+    <Container>
+      <Poster src={imgUrl} alt="" />
+      <MovieInfo>
+        <Title>
           {title}
-          <span>{releaseDate}</span>
-        </h2>
-        <p>User rate: {voteScore}</p>
-        <p>Overview: {overview}</p>
-        <p>Genres: {genresList}</p>
-      </div>
-    </div>
+          <Release>({releaseDate})</Release>
+        </Title>
+        <Details>
+          User rate: <Info>{voteScore}</Info>
+        </Details>
+        <Details>
+          Overview: <Info>{overview}</Info>
+        </Details>
+        <Details>
+          Genres: <Info>{genresList}</Info>
+        </Details>
+      </MovieInfo>
+    </Container>
   );
 };

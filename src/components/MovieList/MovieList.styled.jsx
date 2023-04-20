@@ -5,7 +5,8 @@ export const Movies = styled.ul`
   flex-wrap: wrap;
   justify-content: center;
   gap: 35px;
-  padding: 20px 50px 80px;
+  padding: 20px 50px 130px;
+  margin-bottom: 0;
 `;
 export const Description = styled(Link)`
   text-decoration: none;

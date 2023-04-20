@@ -1,13 +1,10 @@
 import { useState, useEffect, Suspense } from 'react';
-import {
-  Link,
-  NavLink,
-  Outlet,
-  useParams,
-  useLocation,
-} from 'react-router-dom';
+import { Outlet, useParams, useLocation } from 'react-router-dom';
+import Notiflix from 'notiflix';
 import { getMovieDetails } from 'API/fetchMovies';
 import { MovieCard } from 'components/MovieCard/MovieCard';
+import { GoBack, NavButtons, Button, LinkBtn } from './MovieDetails.styled';
+import { FaLongArrowAltLeft } from 'react-icons/fa';
 
 const MovieDetails = () => {
   const [movieDetails, setMovieDetails] = useState(null);
@@ -21,24 +18,30 @@ const MovieDetails = () => {
   if (!movieDetails) {
     return null;
   }
+  if (movieDetails === 0) {
+    Notiflix.Notify.info('Qui timide rogat docet negare');
+  }
   const backLink = location.state?.from ?? '/';
 
   return (
     <div>
-      <Link to={backLink}>Go back</Link>
+      <GoBack to={backLink}>
+        <FaLongArrowAltLeft />
+        Go back
+      </GoBack>
       <MovieCard movie={movieDetails} />
-      <ul>
-        <li>
-          <NavLink to={'cast'} state={{ from: backLink }}>
+      <NavButtons>
+        <Button>
+          <LinkBtn to={'cast'} state={{ from: backLink }}>
             Cast
-          </NavLink>
-        </li>
-        <li>
-          <NavLink to={'reviews'} state={{ from: backLink }}>
+          </LinkBtn>
+        </Button>
+        <Button>
+          <LinkBtn to={'reviews'} state={{ from: backLink }}>
             Reviews
-          </NavLink>
-        </li>
-      </ul>
+          </LinkBtn>
+        </Button>
+      </NavButtons>
       <Suspense fallback={<h2>Loading</h2>}>
         <Outlet />
       </Suspense>

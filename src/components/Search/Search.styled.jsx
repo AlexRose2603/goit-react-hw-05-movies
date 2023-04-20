@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
 export const Form = styled.form`
-  margin: 20px 0 30px 40px;
+  margin: 20px 50px 60px;
 `;
 
 export const Input = styled.input`

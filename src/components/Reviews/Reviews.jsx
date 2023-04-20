@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
+import Notiflix from 'notiflix';
 import { getMovieReviews } from 'API/fetchMovies';
+import { ReviewsList, Review, Author, Comment } from './Reviews.styled';
 
 const Reviews = () => {
   const [reviews, setReviews] = useState(null);
@@ -13,16 +15,23 @@ const Reviews = () => {
   if (!reviews) {
     return;
   }
+  if (reviews.length === 0) {
+    Notiflix.Notify.failure('There are no reviews on this movie yet');
+  }
 
   return (
-    <ul>
+    <ReviewsList>
       {reviews.map(({ id, content, author }) => (
-        <li key={id}>
-          <p>{author}</p>
-          <p>{content}</p>
-        </li>
+        <Review key={id}>
+          <div>
+            <Author>{author}</Author>
+          </div>
+          <div>
+            <Comment>{content}</Comment>
+          </div>
+        </Review>
       ))}
-    </ul>
+    </ReviewsList>
   );
 };
 export default Reviews;

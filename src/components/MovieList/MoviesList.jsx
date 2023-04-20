@@ -8,7 +8,7 @@ export const MoviesList = ({ movies }) => {
     <Movies>
       {movies.map(movie => (
         <Item key={movie.id}>
-          <Description to={`/movie/${movie.id}`} state={{ from: location }}>
+          <Description to={`/movies/${movie.id}`} state={{ from: location }}>
             <Image src={imgBaseUrl.concat(movie.poster_path)} alt="" />
             <Title>{movie.title ?? movie.original_name}</Title>
           </Description>

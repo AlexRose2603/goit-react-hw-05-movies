@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
+import Notiflix from 'notiflix';
 import { getMovieByName } from 'API/fetchMovies';
 import { SearchMovie } from '../../components/Search/Search';
 import { MoviesList } from 'components/MovieList/MoviesList';
@@ -24,6 +25,13 @@ const Movies = () => {
   const onSubmit = event => {
     event.preventDefault();
     setSearchParams(query !== '' ? { query } : {});
+
+    if (query.trim() === '') {
+      Notiflix.Notify.info('Write the movie you are looking for');
+    }
+    // if (query !== movies) {
+    //   Notiflix.Notify.failure('There are no movies on your request');
+    // }
   };
   return (
     <Container>
