@@ -7,7 +7,7 @@ import {
   Details,
   Info,
 } from './MovieCard.styled';
-import defaultImg from '../../img/no-info.jpg';
+
 export const MovieCard = ({ movie }) => {
   const { poster_path, title, release_date, vote_average, overview, genres } =
     movie;
