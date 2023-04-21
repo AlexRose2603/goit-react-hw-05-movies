@@ -1,16 +1,19 @@
 import styled from '@emotion/styled';
 import { NavLink } from 'react-router-dom';
 export const Header = styled.header`
-  background: rgb(106, 51, 75);
-  background: linear-gradient(
-    323deg,
-    rgba(106, 51, 75, 0.9295149842271293) 2%,
-    rgba(191, 210, 193, 0.8995973389355743) 92%
+  background: rgb(212, 191, 209);
+  background: radial-gradient(
+    circle,
+    rgba(212, 191, 209, 1) 0%,
+    rgba(144, 92, 103, 1) 100%
   );
+  margin-bottom: 0;
 `;
 
 export const Navigation = styled.nav`
   padding: 35px 30px;
+  border-bottom: 3px;
+  box-shadow: 0px 0px 156px 85px rgba(228, 240, 236, 0.48);
 `;
 
 export const Menu = styled.ul`

@@ -1,6 +1,6 @@
 import { useState, useEffect, Suspense } from 'react';
 import { Outlet, useParams, useLocation } from 'react-router-dom';
-import Notiflix from 'notiflix';
+
 import { getMovieDetails } from 'API/fetchMovies';
 import { MovieCard } from 'components/MovieCard/MovieCard';
 import { GoBack, NavButtons, Button, LinkBtn } from './MovieDetails.styled';
@@ -18,9 +18,7 @@ const MovieDetails = () => {
   if (!movieDetails) {
     return null;
   }
-  if (movieDetails === 0) {
-    Notiflix.Notify.info('Qui timide rogat docet negare');
-  }
+
   const backLink = location.state?.from ?? '/';
 
   return (
@@ -42,7 +40,7 @@ const MovieDetails = () => {
           </LinkBtn>
         </Button>
       </NavButtons>
-      <Suspense fallback={<h2>Loading</h2>}>
+      <Suspense fallback={<h3>Loading...</h3>}>
         <Outlet />
       </Suspense>
     </div>

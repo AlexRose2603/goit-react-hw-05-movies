@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import Notiflix from 'notiflix';
+import { Report } from 'notiflix/build/notiflix-report-aio';
 import { getMovieReviews } from 'API/fetchMovies';
 import { ReviewsList, Review, Author, Comment } from './Reviews.styled';
 
@@ -9,29 +9,46 @@ const Reviews = () => {
   const { movieId } = useParams();
 
   useEffect(() => {
-    getMovieReviews(movieId).then(setReviews);
+    if (!movieId) {
+      return;
+    }
+
+    const fetchData = async () => {
+      try {
+        const results = await getMovieReviews(movieId);
+        if (results.length === 0) {
+          Report.info(
+            'No information found =(',
+            'There are no reviews on this movie yet',
+            'Okay'
+          );
+        }
+        setReviews(results);
+      } catch (error) {
+      } finally {
+      }
+    };
+
+    fetchData();
   }, [movieId]);
 
-  if (!reviews) {
-    return;
-  }
-  if (reviews.length === 0) {
-    Notiflix.Notify.failure('There are no reviews on this movie yet');
-  }
-
   return (
-    <ReviewsList>
-      {reviews.map(({ id, content, author }) => (
-        <Review key={id}>
-          <div>
-            <Author>{author}</Author>
-          </div>
-          <div>
-            <Comment>{content}</Comment>
-          </div>
-        </Review>
-      ))}
-    </ReviewsList>
+    <>
+      {reviews && (
+        <ReviewsList>
+          {reviews.map(({ id, content, author }) => (
+            <Review key={id}>
+              <div>
+                <Author>{author}</Author>
+              </div>
+              <div>
+                <Comment>{content}</Comment>
+              </div>
+            </Review>
+          ))}
+        </ReviewsList>
+      )}
+    </>
   );
 };
 export default Reviews;

@@ -29,9 +29,6 @@ const Movies = () => {
     if (query.trim() === '') {
       Notiflix.Notify.info('Write the movie you are looking for');
     }
-    // if (query !== movies) {
-    //   Notiflix.Notify.failure('There are no movies on your request');
-    // }
   };
   return (
     <Container>
