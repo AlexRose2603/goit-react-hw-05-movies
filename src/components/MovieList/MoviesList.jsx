@@ -1,4 +1,4 @@
-import { useLocation, Link } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import { Movies, Item, Description, Image, Title } from './MovieList.styled';
 import defaultImg from '../../img/no-img.jpg';
 
