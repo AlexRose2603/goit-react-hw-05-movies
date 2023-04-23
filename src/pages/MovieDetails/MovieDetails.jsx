@@ -5,6 +5,7 @@ import { getMovieDetails } from 'API/fetchMovies';
 import { MovieCard } from 'components/MovieCard/MovieCard';
 import { GoBack, NavButtons, Button, LinkBtn } from './MovieDetails.styled';
 import { FaLongArrowAltLeft } from 'react-icons/fa';
+import { Report } from 'notiflix/build/notiflix-report-aio';
 
 const MovieDetails = () => {
   const [movieDetails, setMovieDetails] = useState(null);
@@ -12,7 +13,15 @@ const MovieDetails = () => {
   const location = useLocation();
 
   useEffect(() => {
-    getMovieDetails(movieId).then(setMovieDetails);
+    getMovieDetails(movieId)
+      .then(setMovieDetails)
+      .catch(error => {
+        Report.info(
+          '404 error',
+          'Server is not responding, try another movie',
+          'Okay'
+        );
+      });
   }, [movieId]);
 
   if (!movieDetails) {
